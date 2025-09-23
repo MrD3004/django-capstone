@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Your Subscriptions</h1>
+
+  <h3>Publishers</h3>
+  {% if publishers %}
+    <ul class="list-group mb-4">
+      {% for publisher in publishers %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          {{ publisher.name }}
+          <a href="{% url 'unsubscribe_publisher' publisher.id %}" 
+             class="btn btn-sm btn-danger">Unsubscribe</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-muted">You are not subscribed to any publishers yet.</p>
+  {% endif %}
+
+  <h3>Journalists</h3>
+  {% if journalists %}
+    <ul class="list-group">
+      {% for journalist in journalists %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          {{ journalist.username }}
+          <a href="{% url 'unsubscribe_journalist' journalist.id %}" 
+             class="btn btn-sm btn-danger">Unfollow</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-muted">You are not following any journalists yet.</p>
+  {% endif %}
+{% endblock %}

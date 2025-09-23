@@ -1,0 +1,27 @@
+<!-- templates/editor_dashboard.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h2>Pending Articles</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for article in articles %}
+      <tr>
+        <td>{{ article.title }}</td>
+        <td>{{ article.author.username }}</td>
+        <td>
+          <a href="{% url 'approve_article' article.id %}" class="btn btn-success btn-sm">Approve</a>
+          <a href="{% url 'edit_article' article.id %}" class="btn btn-warning btn-sm">Edit</a>
+          <a href="{% url 'delete_article' article.id %}" class="btn btn-danger btn-sm">Delete</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
